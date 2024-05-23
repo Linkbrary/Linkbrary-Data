@@ -52,7 +52,9 @@ class NaverBlogSpider(scrapy.Spider):
             "thumbnail": image,
             "embed": embed.tolist()  # 768line
         }
-        print(json.dumps(data))
+        output_path = Path("output.json")
+        with output_path.open('w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
 
 """
     def parse(self, response):

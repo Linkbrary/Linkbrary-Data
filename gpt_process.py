@@ -7,7 +7,7 @@ import tiktoken
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-openai.api_key = 'sk-proj-5v5QvHVaho9oKippXzZxT3BlbkFJThdwQUXLXjpDqXsVGyKn'
+openai.api_key = ''
 tokenizer = tiktoken.get_encoding("cl100k_base")
 tokenizer = tiktoken.encoding_for_model("gpt-3.5-turbo")
 MAX_TOKEN_LENGTH = 3800

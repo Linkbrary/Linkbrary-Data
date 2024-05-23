@@ -39,6 +39,6 @@ class NaverNewsSpider(scrapy.Spider):
             "content": content_all,
             "summary": summary,
             "thumbnail": image,
-            "embed": embed.tolist()  # 768line
+            "embed": embed.tolist()  # 768lSine
         }
         print(json.dumps(data))

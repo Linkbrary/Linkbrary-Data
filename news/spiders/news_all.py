@@ -56,9 +56,32 @@ class NewsSpider(scrapy.Spider):
         elif "news1.kr" in response.url:
             content = response.css('div#articles_detail::text').getall()
             contents = ''.join(content)
-            
-        
-
+        elif "news.mt.co.kr" in response.url:
+            content = response.xpath('//div[@id="textBody"]//text()').getall()
+            contents = ''.join(content)
+        elif "biz.heraldcorp.com" in response.url:
+            content = response.xpath('//*[@id="articleText"]//text()').getall()
+            contents = ''.join(content)
+        elif "edaily.co.kr" in response.url:
+            content = response.xpath('//*[@class="article_body"]//text()').getall()
+            contents = ''.join(content)
+        elif "seoul.co.kr/news" in response.url:
+            content = response.xpath('//div[@class="viewContent body18 color700"]//text()').getall()
+            contents = ''.join(content)
+            pattern = r'googletag.*?;'
+            contents = re.sub(pattern, '', contents)
+        elif "hankookilbo.com" in response.url:
+            content = response.xpath('//div[@class="col-main" and @itemprop="articleBody"]//p[@class="editor-p"]//text()').getall()
+            contents = ''.join(content)
+        elif "asiatoday.co.kr" in response.url:
+            content = response.xpath('//div[@class="news_bm" and @id="font"]//text()').getall()
+            contents = ''.join(content)
+        elif "segye.com" in response.url:
+            content = response.xpath('//div[@id="contents" and @class="article_read"]//text()').getall()
+            contents = ''.join(content)
+        else:
+            content = response.css('p::text').getall()
+            contents = ''.join(content)
 
         image = response.css("meta[property='og:image']::attr(content)").get()
         new_contents = []
@@ -70,10 +93,8 @@ class NewsSpider(scrapy.Spider):
                 new_contents.append(text)
 
         content_all = ' '.join(new_contents)
-        print(title)
-        print(content_all)
-        print(image)
-        """if self.do_summary:
+        
+        if self.do_summary:
             summary = process_new_data(new_contents)
         else :
             summary = None
@@ -93,4 +114,3 @@ class NewsSpider(scrapy.Spider):
                 "embed": embed.tolist()
             }
         print(json.dumps(data))
-        """

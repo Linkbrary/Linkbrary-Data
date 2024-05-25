@@ -63,11 +63,8 @@ class CommunitySpider(scrapy.Spider):
 
         content_all = ' '.join([content for content in new_contents if content])
 
-        print(title)
-        print(content_all)
-        print(image)
 
-        """if self.do_summary:
+        if self.do_summary:
             summary = process_new_data(new_contents)
         else :
             summary = None
@@ -86,4 +83,4 @@ class CommunitySpider(scrapy.Spider):
             data = {
                 "embed": embed.tolist()
             }
-        print(json.dumps(data))"""
+        print(json.dumps(data))

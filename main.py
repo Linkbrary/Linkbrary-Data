@@ -41,7 +41,8 @@ async def run_spider(link: str, background_tasks: BackgroundTasks):
                 or "biz.heraldcorp.com" in link or "edaily.co.kr" in link  or "seoul.co.kr/news" in link\
                      or "hankookilbo.com" in link  or "asiatoday.co.kr" in link or "segye.com" in link:
             spider_name = "news"
-        elif "clien.net" in link or "dcinside.com" in link:
+        elif "clien.net" in link or "dcinside.com" in link or "fmkorea.com" in link or "ruliweb.com" in link \
+            or "inven.co.kr" in link or "pann.nate.com" in link or "theqoo.net" in link:
             spider_name = "community"
         else:
             raise ValueError("지원하지 않는 URL입니다.")

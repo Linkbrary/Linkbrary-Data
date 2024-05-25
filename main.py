@@ -36,6 +36,8 @@ async def run_spider(link: str, background_tasks: BackgroundTasks):
             spider_name = "naverBlog"
         elif "velog.io" in link:
             spider_name = "velog"
+        #elif "chosun.com" in link:
+            #spider_name = "news"
         else:
             raise ValueError("지원하지 않는 URL입니다.")
 

@@ -47,7 +47,7 @@ def process_directory(directory, content: str) -> str:
 
     return chat_response
 
-def testDirectory():
+"""def testDirectory():
     directory = "|--개발,(ID: 123)\n    |--백엔드,(ID: 456)\n       |--restapi,(ID: 789)\n  |--프론트엔드,(ID: 234)\n|--여행,(ID: 567)\n|--경제,(ID: 345)\n|--노래,(ID: 678)\n"
     content = "목요일인 23일은 전국 대부분 지역에서 낮 기온이 25도 이상 오르면서 덥겠고, 대구는 32도까지 오르며 한여름 날씨를 보일 전망이다. 전국은 대체로 맑겠으나 서해안과 수도권‧충청권‧전북내륙에는 오전 사이 짙은 안개가 끼는 곳이 있겠다.\
         기상청에 따르면 이날 아침 최저 기온은 12~22도, 낮 최고기온은 22도~32도가 되겠다.주요 도시별 최저기온은 △서울 16도 △인천 15도 △춘천 13도 △철원 12도 △원주 15도 △강릉 22도 △대전 16도 △세종 15도 △대구 17도 △부산 18도 △광주 \
@@ -67,4 +67,4 @@ def testDirectory2():
     print(process_directory(directory, content))
 
 testDirectory()
-testDirectory2()
+testDirectory2()"""

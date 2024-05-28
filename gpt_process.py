@@ -45,7 +45,7 @@ def process_new_data(contents):
         text_data = tokenizer.decode(tokens)
 
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo-0125',
+        model='gpt-4o',
         max_tokens=300,
         messages=[{"role": "user", "content": text_data}]
     )    

@@ -40,12 +40,15 @@ def process_directory(directory, content: str) -> str:
     )    
 
     chat_response = response.choices[0].message.content
+    directory_str, id_str = parse_response(chat_response)
+    
+    return directory_str, id_str
 
-    results.append({
-        'output': chat_response
-    })
-
-    return chat_response
+def parse_response(response: str) -> tuple:
+    if response.startswith('(') and response.endswith(')'):
+        response = response[1:-1]
+    directory_str, id_part = response.split(", ID:")
+    return directory_str.strip(), id_part.strip()
 
 """def testDirectory():
     directory = "|--개발,(ID: 123)\n    |--백엔드,(ID: 456)\n       |--restapi,(ID: 789)\n  |--프론트엔드,(ID: 234)\n|--여행,(ID: 567)\n|--경제,(ID: 345)\n|--노래,(ID: 678)\n"

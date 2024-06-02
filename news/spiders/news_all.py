@@ -79,6 +79,12 @@ class NewsSpider(scrapy.Spider):
         elif "segye.com" in response.url:
             content = response.xpath('//div[@id="contents" and @class="article_read"]//text()').getall()
             contents = ''.join(content)
+        elif "it.chosun.com" in response.url:
+            content = response.xpath('//article[@id="article-view-content-div"]//p/text()').getall()
+            contents = ''.join(content)
+        elif "bloter.net" in response.url:
+            content = response.css('article.article-veiw-body').get(),
+            contents = ''.join(content)
         else:
             content = response.css('p::text').getall()
             contents = ''.join(content)
@@ -93,6 +99,10 @@ class NewsSpider(scrapy.Spider):
                 new_contents.append(text)
 
         content_all = ' '.join(new_contents)
+
+        print(content_all)
+        print(image)
+        print(title)
         
         if self.do_summary:
             summary = process_new_data(new_contents)

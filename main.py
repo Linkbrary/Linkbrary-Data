@@ -39,7 +39,8 @@ async def run_spider(link: str, background_tasks: BackgroundTasks):
         elif "joongang.com" in link or "donga.com" in link or "hankyung.com" in link or "mk.co.kr" in link \
             or "sedaily.com" in link or "yna.co.kr" in link or "news1.kr" in link or "news.mt.co.kr" in link \
                 or "biz.heraldcorp.com" in link or "edaily.co.kr" in link  or "seoul.co.kr/news" in link\
-                     or "hankookilbo.com" in link  or "asiatoday.co.kr" in link or "segye.com" in link:
+                     or "hankookilbo.com" in link  or "asiatoday.co.kr" in link or "segye.com" in link \
+                        or "it.chosun.com" in link or "bloter.net" in link:
             spider_name = "news"
         elif "clien.net" in link or "dcinside.com" in link or "fmkorea.com" in link or "ruliweb.com" in link \
             or "inven.co.kr" in link or "pann.nate.com" in link or "theqoo.net" in link:
@@ -68,7 +69,8 @@ async def run_spider_linkbrary(link: str, background_tasks: BackgroundTasks):
         elif "joongang.com" in link or "donga.com" in link or "hankyung.com" in link or "mk.co.kr" in link \
             or "sedaily.com" in link or "yna.co.kr" in link or "news1.kr" in link or "news.mt.co.kr" in link \
                 or "biz.heraldcorp.com" in link or "edaily.co.kr" in link  or "seoul.co.kr/news" in link\
-                     or "hankookilbo.com" in link  or "asiatoday.co.kr" in link or "segye.com" in link:
+                     or "hankookilbo.com" in link  or "asiatoday.co.kr" in link or "segye.com" in link \
+                        or "it.chosun.com" in link or "bloter.net" in link:
             spider_name = "news"
         elif "clien.net" in link or "dcinside.com" in link or "fmkorea.com" in link or "ruliweb.com" in link \
             or "inven.co.kr" in link or "pann.nate.com" in link or "theqoo.net" in link:
@@ -88,10 +90,11 @@ class DirectoryRequest(BaseModel):
 @app.post("/directory")
 async def process_content(request: DirectoryRequest):
     try:
-        gpt_response = directory_gpt.process_directory(request.directory, request.content)
+        directoryStr, idStr = directory_gpt.process_directory(request.directory, request.content)
         
         response_data = {
-            "directory": gpt_response
+            "directory": directoryStr,
+            "id": idStr
         }
         return response_data
     except Exception as e:

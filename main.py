@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import subprocess
 import json
 import directory_gpt
+import doc2vec
 import asyncio
 
 app = FastAPI()
@@ -95,6 +96,21 @@ async def process_content(request: DirectoryRequest):
         response_data = {
             "directory": directoryStr,
             "id": idStr
+        }
+        return response_data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+class embeddingRequest(BaseModel):
+    contents: str
+    
+@app.post("/embedding")
+async def embedding_only_text(request: embeddingRequest):
+    try:
+        embeddedContents = doc2vec.embed_text(request.contents)
+
+        response_data = {
+            "embedded_contents": embeddedContents
         }
         return response_data
     except Exception as e:

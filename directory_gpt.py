@@ -48,6 +48,8 @@ def parse_response(response: str) -> tuple:
     if response.startswith('(') and response.endswith(')'):
         response = response[1:-1]
     directory_str, id_part = response.split(", ID:")
+    if directory_str.startswith('<')and directory_str.endswith('>'):
+        directory_str = directory_str[1:-1]
     return directory_str.strip(), id_part.strip()
 
 """def testDirectory():

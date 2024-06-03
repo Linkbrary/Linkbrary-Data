@@ -45,11 +45,11 @@ class NaverNewsSpider(scrapy.Spider):
                 "content": content_all,
                 "summary": summary,
                 "thumbnail": image,
-                "embed": embed.tolist()  # 768line
+                "embed": embed  # 768line
             }
         else:
             data = {
-                "embed": embed.tolist()
+                "embed": embed
             }
         print(json.dumps(data))
         

@@ -2,15 +2,24 @@ import torch
 from torch.nn import CosineSimilarity
 from transformers import BertModel, BertTokenizer
 from torch.nn.functional import normalize
+import openai
 
-# Load tokenizer and model
+"""# Load tokenizer and model
 tokenizer = BertTokenizer.from_pretrained('monologg/kobert')
 model = BertModel.from_pretrained('monologg/kobert')
-model.eval()  # Set the model to evaluation mode
+model.eval()  # Set the model to evaluation mode"""
+
+openai.api_key=""
 
 
 def embed_text(texts):
        text_all = ' '.join([text for text in texts if text])
+       model = "text-embedding-3-large"
+       response = openai.Embedding.create(input = [text_all], model = model)
+       embeded_text = response['data'][0]['embedding']
+       return embeded_text
+
+       """text_all = ' '.join([text for text in texts if text])
        tokens = tokenizer(text_all, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
 
        with torch.no_grad():
@@ -19,7 +28,7 @@ def embed_text(texts):
        cls_embedding = outputs.last_hidden_state[:, 0, :]
        normalized_embeddings = normalize(cls_embedding, p=2, dim=1)  # L2 정규화 적용
 
-       return normalized_embeddings
+       return normalized_embeddings"""
 
 
 """def embed_test(text):
@@ -33,6 +42,7 @@ def embed_text(texts):
        print(cls_embedding)
 
        return cls_embedding
+       
 
 def test_embeding(embeddings, tests):
        test_all = ' '.join([test for test in tests if test])
@@ -59,9 +69,9 @@ def test_embeding(embeddings, tests):
                    "넥슨이 6∼7월 주최하는 'eK리그 서포터즈컵 2024' 본선 참가 자격을 갖는다.구단 관계자는 \"전북현대 팬과 응원단, 순수"\
                    "아마추어가 참가해 필드가 아닌 온라인 게임에서 활동할 전북현대 대표선수를 뽑는 대회\"라며 많은 참가를 요청했다."
 
-       embedding1 = embed_test(test_all)
-       embedding2 = embed_test(testText2)
-       embedding3 = embed_test(testText3)
+       embedding1 = embed_text(test_all)
+       embedding2 = embed_text(testText2)
+       embedding3 = embed_text(testText3)
 
        cos = CosineSimilarity(dim=1)
        similarity1 = cos(embeddings, embedding1)
@@ -77,9 +87,9 @@ def test_title(text):
        testText2 = "대구~경북 광역철도 등 6개 예타 대상사업 선정"
        testText3 = "의대 6곳 아직 개강 못 해…대학들 '학년제 전환'엔 미온적"
 
-       embedding1 = embed_test(testText1)
-       embedding2 = embed_test(testText2)
-       embedding3 = embed_test(testText3)
+       embedding1 = embed_text(testText1)
+       embedding2 = embed_text(testText2)
+       embedding3 = embed_text(testText3)
 
        cos = CosineSimilarity(dim=1)
        similarity1 = cos(text, embedding1)
@@ -88,4 +98,5 @@ def test_title(text):
 
        print(f"1의 유사도: {similarity1.item()}")
        print(f"2의 유사도: {similarity2.item()}")
-       print(f"3의 유사도: {similarity3.item()}")"""
+       print(f"3의 유사도: {similarity3.item()}")
+"""

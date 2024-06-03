@@ -117,10 +117,10 @@ class NewsSpider(scrapy.Spider):
                 "content": content_all,
                 "summary": summary,
                 "thumbnail": image,
-                "embed": embed.tolist()  # 768line
+                "embed": embed
             }
         else:
             data = {
-                "embed": embed.tolist()
+                "embed": embed
             }
         print(json.dumps(data))

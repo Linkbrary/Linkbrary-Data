@@ -52,7 +52,7 @@ async def run_spider(link: str, background_tasks: BackgroundTasks):
         data = await extract_data(link, spider_name, do_summary=True)
         return data
     except Exception as e:
-        raise HTTPException(status_code=450, detail=str(e))
+        raise HTTPException(status_code=451, detail=str(e))
     
 @app.get("/linkbrary/{link:path}")
 async def run_spider_linkbrary(link: str, background_tasks: BackgroundTasks):

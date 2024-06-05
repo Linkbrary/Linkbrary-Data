@@ -52,7 +52,7 @@ async def run_spider(link: str, background_tasks: BackgroundTasks):
         data = await extract_data(link, spider_name, do_summary=True)
         return data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=450, detail=str(e))
     
 @app.get("/linkbrary/{link:path}")
 async def run_spider_linkbrary(link: str, background_tasks: BackgroundTasks):
@@ -82,7 +82,7 @@ async def run_spider_linkbrary(link: str, background_tasks: BackgroundTasks):
         data = await extract_data(link, spider_name, do_summary=False)
         return data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=451, detail=str(e))
 
 class DirectoryRequest(BaseModel):
     directory: str
@@ -99,7 +99,7 @@ async def process_content(request: DirectoryRequest):
         }
         return response_data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=452, detail=str(e))
     
 class embeddingRequest(BaseModel):
     contents: str
@@ -114,7 +114,7 @@ async def embedding_only_text(request: embeddingRequest):
         }
         return response_data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=453, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
